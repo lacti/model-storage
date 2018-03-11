@@ -2,3 +2,4 @@ nose
 sphinx
 fire
 tqdm
+logzero

@@ -1,1 +1,1 @@
-from .core import hmm
+from .model_storage import ModelStorage
