@@ -3,3 +3,4 @@ sphinx
 fire
 tqdm
 logzero
+boto3

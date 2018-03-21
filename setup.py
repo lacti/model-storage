@@ -15,7 +15,7 @@ setup(
     long_description=readme,
     author='Hyunjong Lee',
     author_email='https://github.com/hyunjong-lee/model-storage/wiki',
-    url='https://github.com/kennethreitz/samplemod',
+    url='https://github.com/hyunjong-lee/model-storage',
     license=license,
     packages=find_packages(exclude=('tests', 'docs'))
 )
