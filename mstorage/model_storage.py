@@ -46,5 +46,4 @@ class ModelStorage(object):
 
 
 def cli():
-    ms = ModelStorage()
-    fire.Fire(ms)
+    fire.Fire(ModelStorage)
