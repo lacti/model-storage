@@ -10,13 +10,16 @@ with open('LICENSE') as f:
 
 setup(
     name='model-storage',
-    version='0.1.0',
+    version='0.0.1',
     description='Model Storage based on AWS S3 and MySQL',
     long_description=readme,
     author='Hyunjong Lee',
     author_email='https://github.com/hyunjong-lee/model-storage/wiki',
     url='https://github.com/hyunjong-lee/model-storage',
     license=license,
-    packages=find_packages(exclude=('tests', 'docs'))
+    packages=find_packages(exclude=('tests', 'docs')),
+    entry_points={
+        'console_scripts': ['mstorage=mstorage.ModelStorage.cli'],
+    },
 )
 
