@@ -22,9 +22,9 @@ setup(
     url='https://github.com/hyunjong-lee/model-storage',
     license=license,
     install_requires=required,
-    packages=['mstorage', 'mstorage.ModelStorage'],
+    packages=find_packages(exclude=('tests', 'docs')),
     entry_points={
-        'console_scripts': ['mstorage=mstorage.ModelStorage:cli'],
+        'console_scripts': ['mstorage=mstorage.model_storage:cli'],
     },
 )
 
