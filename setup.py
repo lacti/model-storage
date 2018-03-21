@@ -24,7 +24,7 @@ setup(
     install_requires=required,
     packages=find_packages(exclude=('tests', 'docs')),
     entry_points={
-        'console_scripts': ['mstorage=mstorage.ModelStorage.cli'],
+        'console_scripts': ['mstorage=mstorage.model_storage.ModelStorage.cli'],
     },
 )
 
