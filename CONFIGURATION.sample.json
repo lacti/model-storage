@@ -1,0 +1,11 @@
+{
+    "s3": {
+        "bucket": "model-storage"
+    },
+    "db_connection": {
+        "host": "mysql.example.host",
+        "user": "myuser",
+        "password": "mypassword",
+        "database": "default"
+    }
+}

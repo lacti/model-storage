@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import json
 import uuid
 
@@ -6,43 +7,31 @@ import fire
 import boto3
 
 from .logger import Logger
+from .database import Database
 
 
 class ModelStorage(object):
-    def __init__(self):
-        self.logger = Logger(prefix='ModelStorage')
-        self.s3 = boto3.resource('s3')
+    def __init__(self, bucket_name):
+        self.__logger = Logger(prefix='ModelStorage')
+        self.__s3 = boto3.resource('s3')
+        self.__config = json.load(open('./config/mstorage.json'))
+        self.__bucket_name = self.__config['s3']['bucket']
+        self.__db = Database(self.__config['db_connection'])
 
-    def push(self, service, model_name, src_fname, bucket_name, **kwargs):
-        assert self.__validate_bucket(bucket_name), 'TODO'
-        assert self.__validate_push(service, src_fname, model_fname), 'TODO'
-        s3_path = '%s/%s/%s' % (service, model_name, version)
-        s3.meta.client.upload_file(src_fname, s3_path)
-        raise NotImplementedError
+    def push(self, service, model_name, src_fname, **kwargs):
+        assert os.path.isfile(src_fname), 'must be file: [%s]' % src_model_fname
 
-    def pull(self, bucket_name, service, model_name, out_fname, **kwargs):
-        assert self.__validate_bucket(bucket_name), 'TODO'
-        assert self.__validate_pull(service, out_name, model_fname)
-        raise NotImplementedError
+        v = self.__db.generate_version(service, model_name)
+        s3_key = '%s/%s/%s' % (service, model_name, v)
+        self.__s3.meta.client.upload_file(src_fname, 'pubg-model-storage', s3_key)
+        self.__db.commit_version(service, model_name, s3_key, kwargs)
 
-    def __mkdir_s3(self, path):
-        return False
-
-    def __validate_bucket(self, bucket):
-        raise NotImplementedError
-        return False
-
-    def __validate(self, service, model_name):
-        raise NotImplementedError
-        return False
-
-    def __validate_push(self, service, model_name, src_model_fname):
-        assert self.__validate(service, model_name), 'TODO'
-        raise NotImplementedError
-
-    def __validate_pull(self, service, model_name, out_model_fname):
-        assert self.__validate(service, model_name), 'TODO'
-        raise NotImplementedError
+    def pull(self, service, model_name, out_fname):
+        meta = self.__db.get_lastest(service, model_name)
+        s3_key = meta['s3_key']
+        self.__s3.download_file(self.__bucket_name,
+                                s3_key,
+                                out_fname)
 
 
 def cli():
