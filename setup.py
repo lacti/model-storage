@@ -64,6 +64,7 @@ setup(
     url='https://github.com/hyunjong-lee/model-storage',
     license=license,
     install_requires=required,
+    include_package_data=True,
     cmdclass={
         'install': InstallCommand,
     },

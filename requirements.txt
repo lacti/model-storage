@@ -4,3 +4,5 @@ fire
 tqdm
 logzero
 boto3
+sqlalchemy
+mysqlclient
