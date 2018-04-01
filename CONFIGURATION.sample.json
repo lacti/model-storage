@@ -3,9 +3,12 @@
         "bucket": "model-storage"
     },
     "db_connection": {
+        "protocol": "mysql",
         "host": "mysql.example.host",
+        "port": 3306,
         "user": "myuser",
         "password": "mypassword",
-        "database": "default"
+        "database": "default",
+        "encode": "?charset=utf8"
     }
 }
