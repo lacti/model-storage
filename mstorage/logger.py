@@ -13,13 +13,13 @@ class Logger:
         printer(f_msg)
 
     def info(self, msg, *args):
-        self.__print(logger.info, msg, args)
+        self.__print(logger.info, msg, *args)
 
     def debug(self, msg, *args):
-        self.__print(logger.debug, msg, args)
+        self.__print(logger.debug, msg, *args)
 
     def warn(self, msg, *args):
-        self.__print(logger.debug, msg, args)
+        self.__print(logger.debug, msg, *args)
 
     def error(self, msg, *args):
-        self.__print(logger.debug, msg, args)
+        self.__print(logger.debug, msg, *args)
