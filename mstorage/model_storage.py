@@ -17,7 +17,7 @@ class ModelStorage(object):
         self.__s3 = boto3.resource('s3')
 
         apath = os.path.abspath(os.path.dirname(__file__))
-        tpath = os.path.join(apath, './config/mstorage.json')
+        tpath = os.path.join(apath, 'config/mstorage.json')
         self.__config = json.load(open(tpath))
         self.__bucket = self.__config['s3']['bucket']
         self.__db = Database(self.__config['db_connection'])

@@ -48,7 +48,10 @@ class InstallCommand(install):
         # copy config file
         import shutil
         apath = os.path.abspath(os.path.dirname(__file__))
-        tpath = os.path.join(apath, './mstorage/config/mstorage.json')
+        dpath = os.path.join(apath, 'mstorage/config/')
+        if not os.path.exists(dpath):
+            os.mkdir(dpath)
+        tpath = os.path.join(apath, 'mstorage/config/mstorage.json')
         shutil.copy(config_path, tpath)
 
         install.run(self)
