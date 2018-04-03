@@ -13,7 +13,7 @@ class ActiveModel(Base):
 
     service = Column(sqlalchemy.String(64), primary_key=True)
     model = Column(sqlalchemy.String(128), primary_key=True)
-    version = Column(sqlalchemy.String(64), primary_key=True)
+    version = Column(sqlalchemy.String(64), nullable=False)
 
     def __init__(self, service, model, version, *args, **kwargs):
         self.service = service

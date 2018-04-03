@@ -55,6 +55,12 @@ class ModelStorage(object):
 
     def pull(self, service, model, out_fname, version=None):
         meta = self.__db.get(service, model, version=version)
+        if meta is None:
+            self.__logger.info('failed to find version for service [%s], model [%s], version [%s]',
+                               service,
+                               model,
+                               version)
+            return
         s3_key = meta['s3_key']
         self.__s3.meta.client.download_file(self.__bucket,
                                             s3_key,

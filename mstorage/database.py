@@ -59,16 +59,19 @@ class Database(object):
             session = self.Session(bind=conn)
             if not version:
                 active = session.query(ActiveModel)\
-                    .filter(service==service)\
-                    .filter(model==model)\
-                    .one()
+                    .filter_by(service=service)\
+                    .filter_by(model=model)\
+                    .one_or_none()
+                if active == None:
+                    self.logger.info('no version, service [%s], model[%s]', service, model)
+                    return None
                 version = active.version
                 self.logger.info('fetch active version [%s]', version)
             meta = session.query(Model)\
-                .filter(service==service)\
-                .filter(model==model)\
-                .filter(version==version)\
-                .one()
+                .filter_by(service=service)\
+                .filter_by(model=model)\
+                .filter_by(version=version)\
+                .one_or_none()
         if not meta:
             self.logger.info('no model, service [%s], model[%s]', service, model)
             return None
