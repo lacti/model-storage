@@ -17,7 +17,7 @@ class ModelStorage(object):
         self.__s3 = boto3.resource('s3')
 
         apath = os.path.abspath(os.path.dirname(__file__))
-        tpath = os.path.join(apath, './config/mstorage.json')
+        tpath = os.path.join(apath, 'config/mstorage.json')
         self.__config = json.load(open(tpath))
         self.__bucket = self.__config['s3']['bucket']
         self.__db = Database(self.__config['db_connection'])
@@ -55,6 +55,12 @@ class ModelStorage(object):
 
     def pull(self, service, model, out_fname, version=None):
         meta = self.__db.get(service, model, version=version)
+        if meta is None:
+            self.__logger.info('failed to find version for service [%s], model [%s], version [%s]',
+                               service,
+                               model,
+                               version)
+            return
         s3_key = meta['s3_key']
         self.__s3.meta.client.download_file(self.__bucket,
                                             s3_key,

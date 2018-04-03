@@ -4,6 +4,11 @@
 
 # Install
 
+## requirements
+
+1. [Install AWS Cli](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+2. [Configure AWS](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
+
 ## pip
 ```bash
 $> wget https://raw.githubusercontent.com/hyunjong-lee/model-storage/master/CONFIGURATION.sample.json -O conf.json

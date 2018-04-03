@@ -1,5 +1,6 @@
 # example files
 *.sample.json
+mstorage/config/mstorage.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
